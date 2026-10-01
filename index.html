@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudio de Doblaje · time codes, traducción y sincronía para doblaje</title>
+<meta name="description" content="App para traductores de doblaje al español latino: time codes con Whisper, traducción con IA según tu estilo y glosario, sincronía con el video. Todo en tu computadora, sin internet.">
+<meta property="og:title" content="Estudio de Doblaje">
+<meta property="og:description" content="Time codes, traducción con IA y sincronía para doblaje en español latino. Todo en tu computadora, sin internet.">
+<meta property="og:image" content="img/pro.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%237b8cff'/%3E%3Cpath d='M5 10.5v3M8.5 7.5v9M12 5v14M15.5 9v6M19 7v10' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #0d1017; --fondo-2: #131722; --panel: #171c28; --borde: #262d3d; --texto: #eef1f8; --texto-2: #b4bbcc;
+    --texto-3: #7f879a; --acento: #7b8cff; --acento-2: #b07bff; --oro: #ffc847; --verde: #3ecf8e;
+    --radio: 16px; --max: 1140px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 16px/1.6 Inter, "Segoe UI", system-ui, sans-serif; }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  .ancho { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+  /* Barra superior */
+  header.barra { position: sticky; top: 0; z-index: 10; background: rgba(13,16,23,.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--borde); }
+  header .ancho { display: flex; align-items: center; gap: 24px; height: 64px; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; font-size: 17px; white-space: nowrap; }
+  .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--acento), var(--acento-2)); display: grid; place-items: center; box-shadow: 0 4px 16px rgba(123,140,255,.4); flex: none; }
+  nav.enlaces { display: flex; gap: 22px; margin-left: auto; }
+  nav.enlaces a { text-decoration: none; color: var(--texto-2); font-weight: 500; font-size: 15px; }
+  nav.enlaces a:hover { color: var(--texto); }
+  .boton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 16px; border: 1px solid transparent; transition: transform .15s, box-shadow .15s; }
+  .boton:hover { transform: translateY(-1px); }
+  .boton.primario { background: linear-gradient(135deg, var(--acento), var(--acento-2)); color: #fff; box-shadow: 0 8px 24px rgba(123,140,255,.35); }
+  .boton.oro { background: linear-gradient(135deg, #ffd25e, #ff9f1e); color: #1d1404; box-shadow: 0 8px 24px rgba(255,170,40,.25); }
+  .boton.fantasma { border-color: var(--borde); color: var(--texto); background: var(--panel); }
+  .boton.chico { padding: 8px 16px; font-size: 14px; border-radius: 10px; }
+
+  /* Portada */
+  .portada { padding: 72px 0 40px; text-align: center; background: radial-gradient(800px 420px at 50% -80px, rgba(123,140,255,.28), transparent 70%); }
+  .etiqueta { display: inline-block; padding: 6px 14px; border-radius: 30px; background: rgba(123,140,255,.12); border: 1px solid rgba(123,140,255,.3); color: #c7cfff; font-size: 14px; font-weight: 600; }
+  h1 { font-size: clamp(36px, 6vw, 62px); line-height: 1.08; letter-spacing: -1.5px; margin: 20px auto 18px; max-width: 900px; }
+  h1 .degradado { background: linear-gradient(135deg, #a5b1ff, #d4a8ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .portada p.lema { font-size: clamp(17px, 2.2vw, 20px); color: var(--texto-2); max-width: 720px; margin: 0 auto 30px; }
+  .acciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .nota-chica { color: var(--texto-3); font-size: 14px; margin-top: 14px; }
+  .captura-portada { margin: 48px auto 0; max-width: 1060px; border-radius: 18px; overflow: hidden; border: 1px solid var(--borde); box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03); }
+
+  /* Franja de confianza */
+  .franja { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 64px auto; }
+  .franja div { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 22px; }
+  .franja b { display: block; font-size: 17px; margin: 8px 0 4px; }
+  .franja span { color: var(--texto-2); font-size: 15px; }
+  .ico { font-size: 26px; }
+
+  section { padding: 56px 0; }
+  h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.8px; line-height: 1.15; margin: 0 0 12px; }
+  .sub { color: var(--texto-2); font-size: 18px; margin: 0 0 36px; max-width: 720px; }
+  .centro { text-align: center; }
+  .centro .sub { margin-left: auto; margin-right: auto; }
+
+  /* Flujo */
+  .flujo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; margin-bottom: 56px; }
+  .flujo span { padding: 8px 14px; border-radius: 10px; background: var(--panel); border: 1px solid var(--borde); font-size: 14px; font-weight: 600; }
+  .flujo span.app { border-color: rgba(123,140,255,.45); color: #c7cfff; }
+  .flujo i { font-style: normal; color: var(--texto-3); }
+
+  /* Funciones */
+  .funcion { display: grid; grid-template-columns: 1fr 1.25fr; gap: 48px; align-items: center; margin-bottom: 72px; }
+  .funcion.inv .texto { order: 2; }
+  .funcion .num { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(123,140,255,.14); color: #c7cfff; font-weight: 800; margin-bottom: 14px; }
+  .funcion h3 { font-size: 26px; letter-spacing: -.4px; margin: 0 0 10px; }
+  .funcion p { color: var(--texto-2); margin: 0 0 14px; }
+  .funcion ul { margin: 0; padding: 0; list-style: none; }
+  .funcion li { padding-left: 26px; position: relative; margin: 7px 0; color: var(--texto-2); }
+  .funcion li::before { content: "✓"; position: absolute; left: 0; color: var(--verde); font-weight: 800; }
+  .funcion li b { color: var(--texto); }
+  .marco { border-radius: 14px; overflow: hidden; border: 1px solid var(--borde); box-shadow: 0 24px 60px rgba(0,0,0,.5); max-height: 520px; }
+  .marco img { width: 100%; object-fit: cover; object-position: top; }
+  .pro-chip { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 8px; background: linear-gradient(135deg, #ffd25e, #ff9f1e); color: #1d1404; font-size: 12px; font-weight: 800; vertical-align: 4px; letter-spacing: .5px; }
+
+  /* Precios */
+  .precios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+  .plan { background: var(--panel); border: 1px solid var(--borde); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; }
+  .plan.destacado { border-color: rgba(255,200,71,.6); background: linear-gradient(180deg, rgba(255,200,71,.08), var(--panel) 40%); position: relative; }
+  .plan.destacado::before { content: "Precio de lanzamiento"; position: absolute; top: -13px; left: 28px; background: var(--oro); color: #1d1404; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+  .plan h3 { margin: 0; font-size: 20px; }
+  .precio { font-size: 44px; font-weight: 800; letter-spacing: -1px; margin: 10px 0 2px; }
+  .precio small { font-size: 16px; color: var(--texto-3); font-weight: 600; letter-spacing: 0; }
+  .precio s { font-size: 22px; color: var(--texto-3); font-weight: 600; margin-left: 6px; }
+  .plan .que { color: var(--texto-2); font-size: 15px; min-height: 48px; }
+  .plan ul { list-style: none; padding: 0; margin: 18px 0 24px; flex: 1; }
+  .plan li { padding: 7px 0 7px 26px; position: relative; font-size: 15px; border-top: 1px solid var(--borde); }
+  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--verde); font-weight: 800; }
+  .plan li.no { color: var(--texto-3); }
+  .plan li.no::before { content: "—"; color: var(--texto-3); }
+  .regalo { margin-top: 22px; padding: 18px 22px; border-radius: 14px; border: 1px dashed rgba(123,140,255,.45); background: rgba(123,140,255,.06); color: var(--texto-2); text-align: center; }
+
+  /* Requisitos y preguntas */
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .caja { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 26px; }
+  .caja h3 { margin: 0 0 12px; font-size: 19px; }
+  .caja p, .caja li { color: var(--texto-2); font-size: 15px; }
+  .caja ul { padding-left: 20px; margin: 0; }
+  details { background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 18px 22px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::after { content: "+"; color: var(--acento); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--texto-2); margin: 12px 0 0; }
+
+  .llamado { text-align: center; padding: 64px 24px; border-radius: 24px; background: radial-gradient(600px 300px at 50% 0, rgba(123,140,255,.25), transparent 70%), var(--fondo-2); border: 1px solid var(--borde); }
+  footer { border-top: 1px solid var(--borde); padding: 32px 0 48px; color: var(--texto-3); font-size: 14px; margin-top: 56px; }
+  footer .ancho { display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
+  footer a { color: var(--texto-2); text-decoration: none; margin-right: 18px; }
+  footer a:hover { color: var(--texto); }
+
+  @media (max-width: 900px) {
+    nav.enlaces { display: none; }
+    .franja, .precios, .dos { grid-template-columns: 1fr; }
+    .funcion { grid-template-columns: 1fr; gap: 22px; margin-bottom: 56px; }
+    .funcion.inv .texto { order: 0; }
+    .portada { padding-top: 48px; }
+  }
+  @media (max-width: 520px) {
+    header .boton { display: none; }
+    .acciones .boton { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="ancho">
+    <a class="marca" href="#"><span class="logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3"/></svg></span>Estudio de Doblaje</a>
+    <nav class="enlaces">
+      <a href="#funciones">Funciones</a>
+      <a href="#precios">Gratis y Pro</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="guia.pdf">Guía de uso</a>
+    </nav>
+    <a class="boton primario chico" href="https://github.com/sunkpoet-lang/guion-timecodes-whisper-/releases/latest">Descargar gratis</a>
+  </div>
+</header>
+
+<main>
+  <div class="portada">
+    <div class="ancho">
+      <span class="etiqueta">🎙️ Para traductores y estudios de doblaje en español latino</span>
+      <h1>Del guion del cliente a la <span class="degradado">entrega con time codes</span>, en tu computadora</h1>
+      <p class="lema">Time codes con Whisper, traducción con IA que sigue tu estilo y tu glosario, y sincronía con el video.
+        Sin internet: tus guiones y videos nunca salen de tu equipo.</p>
+      <div class="acciones">
+        <a class="boton primario" href="https://github.com/sunkpoet-lang/guion-timecodes-whisper-/releases/latest">⬇ Descargar gratis</a>
+        <a class="boton oro" href="#precios">⭐ Pro · 39 USD, pago único</a>
+      </div>
+      <p class="nota-chica">Windows, Mac y Linux · Transcribir, convertir y sincronizar es gratis</p>
+      <div class="captura-portada"><img src="img/app.jpg" alt="Pantalla de Estudio de Doblaje: Time codes con Whisper" width="1600" height="1000"></div>
+    </div>
+  </div>
+
+  <div class="ancho">
+    <div class="franja">
+      <div><span class="ico">🔒</span><b>Tus guiones no salen de tu PC</b><span>Todo corre en tu computadora, sin subir nada a internet. Ideal para material bajo NDA.</span></div>
+      <div><span class="ico">⚡</span><b>Usa tu tarjeta de video</b><span>NVIDIA, AMD, Intel o gráfica integrada; si no tienes, funciona con el procesador. La app elige sola lo más rápido.</span></div>
+      <div><span class="ico">📄</span><b>Los formatos de la industria</b><span>Word, Excel, .srt, .ass, ASR y ASREC, guiones de EE. UU. y el Excel DUB SCRIPT de Netflix.</span></div>
+    </div>
+  </div>
+
+  <section id="funciones">
+    <div class="ancho">
+      <div class="centro">
+        <h2>Un episodio completo, en una sola app</h2>
+        <p class="sub">Cada herramienta funciona sola o encadenada con las demás.</p>
+      </div>
+      <div class="flujo">
+        <span>Material del cliente</span><i>→</i><span class="app">Convertir libreto</span><i>→</i><span class="app">Traducir</span><i>→</i>
+        <span>Tú revisas</span><i>→</i><span class="app">Time codes</span><i>→</i><span class="app">Sincronizar</span><i>→</i><span>Word · Excel · .srt</span>
+      </div>
+
+      <div class="funcion">
+        <div class="texto">
+          <div class="num">1</div>
+          <h3>Time codes con Whisper</h3>
+          <p>Subes el video y tu guion: Whisper escucha el audio y pone el TIME CODE a cada línea.</p>
+          <ul>
+            <li><b>Guion traducido</b>: lo ubica en el video aunque esté en otro idioma, con alineación por IA.</li>
+            <li><b>ASREC sin time code</b>: palabra por palabra; las líneas dudosas quedan en amarillo.</li>
+            <li><b>Sin guion</b>: subtítulos .srt directo de lo que escucha.</li>
+          </ul>
+        </div>
+        <div class="marco"><img src="img/timecodes.jpg" alt="Time codes con Whisper" loading="lazy"></div>
+      </div>
+
+      <div class="funcion inv">
+        <div class="texto">
+          <div class="num">2</div>
+          <h3>Convertir libreto</h3>
+          <p>Cualquier guion queda en la tabla de siempre: <b>T.C. · PERSONAJE · DIÁLOGO</b>, lista para Word o Excel.</p>
+          <ul>
+            <li>Libretos tradicionales, guiones numerados, "as broadcast", ASR de Word con tabla y subtítulos .srt / .ass.</li>
+            <li><b>Guiones de cine y series de EE. UU.</b>: pegas el texto y saca solo los diálogos, sin la acción.</li>
+            <li>Hoja de personajes en Excel y autocompletado de nombres.</li>
+          </ul>
+        </div>
+        <div class="marco"><img src="img/libreto.jpg" alt="Convertir libreto" loading="lazy"></div>
+      </div>
+
+      <div class="funcion">
+        <div class="texto">
+          <div class="num">3</div>
+          <h3>Traducir con tu estilo</h3>
+          <p>Un modelo de IA que corre en tu equipo traduce el guion siguiendo el <b>perfil</b> de la serie: reglas de lip sync,
+            trato, groserías y un glosario de personajes y términos.</p>
+          <ul>
+            <li>Perfiles por género (animé, caricaturas, drama, voice-over, subtítulos…) y por serie.</li>
+            <li><b>El glosario se respeta</b>: lo que no cumple se pide otra vez y, si aun así falla, queda para revisar.</li>
+            <li>Es un borrador para ti: lo revisas y adaptas en la misma tabla.</li>
+          </ul>
+        </div>
+        <div class="marco"><img src="img/traducir.jpg" alt="Traducción revisada en la tabla" loading="lazy"></div>
+      </div>
+
+      <div class="funcion inv">
+        <div class="texto">
+          <div class="num">4</div>
+          <h3>Excel de Netflix <span class="pro-chip">PRO</span></h3>
+          <p>Carga el DUB SCRIPT tal como llega. La app traduce <b>TRANSCRIPTION</b>, lee las <b>ANNOTATIONS</b> y <b>TAGS</b>
+            como contexto y devuelve una copia del mismo Excel con la columna <b>DIALOGUE</b> llena.</p>
+          <ul>
+            <li>Formato, T.C. y las demás hojas quedan igual.</li>
+            <li>En versiones nuevas, conserva lo que ya traduciste.</li>
+          </ul>
+        </div>
+        <div class="marco"><img src="img/netflix.jpg" alt="Excel de Netflix traducido" loading="lazy"></div>
+      </div>
+
+      <div class="funcion">
+        <div class="texto">
+          <div class="num">5</div>
+          <h3>Sincronizar con el video</h3>
+          <p>Ajusta los T.C. viendo el video, con el subtítulo encima y la línea de tiempo por personaje.</p>
+          <ul>
+            <li>Arrastra y estira líneas con el mouse; copia y pega diálogos que se repiten.</li>
+            <li>Filtra por personaje y mueve solo sus líneas.</li>
+            <li><b>Comparar versiones</b> y <b>leer el TC quemado</b> <span class="pro-chip">PRO</span> cuando el cliente cambia cortes o cortinillas.</li>
+          </ul>
+        </div>
+        <div class="marco"><img src="img/sincronizar.jpg" alt="Sincronizar: tabla con atajos" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="precios">
+    <div class="ancho">
+      <div class="centro">
+        <h2>Gratis para empezar. Pro para producir.</h2>
+        <p class="sub">Sin suscripción. Se paga en Buy Me a Coffee y la clave llega a tu correo; se activa en la app, sin internet.</p>
+      </div>
+      <div class="precios">
+        <div class="plan">
+          <h3>Gratis</h3>
+          <div class="precio">0 <small>USD</small></div>
+          <div class="que">Para conocer la app y para el trabajo diario sin traducción.</div>
+          <ul>
+            <li>Time codes con Whisper, sin límite</li>
+            <li>Convertir libreto y hoja de personajes</li>
+            <li>Sincronizar con el video</li>
+            <li>Traducir: 1 guion al día (hasta 1500 líneas)</li>
+            <li>6 perfiles incluidos + Mi perfil editable</li>
+            <li>Glosario de 25 entradas, con Excel</li>
+            <li class="no">Excel de Netflix, comparar versiones</li>
+          </ul>
+          <a class="boton fantasma" href="https://github.com/sunkpoet-lang/guion-timecodes-whisper-/releases/latest">Descargar</a>
+        </div>
+        <div class="plan">
+          <h3>☕ Café</h3>
+          <div class="precio">5 <small>USD</small></div>
+          <div class="que">2 traducciones con todo lo Pro, para un episodio de verdad. No vencen.</div>
+          <ul>
+            <li>Cualquier perfil, incluidos los que importes</li>
+            <li>Excel de Netflix</li>
+            <li>Guiones sin límite de líneas</li>
+            <li>Úsalas cuando quieras</li>
+            <li>Y apoyas que la app siga creciendo</li>
+          </ul>
+          <a class="boton fantasma" href="https://buymeacoffee.com/dannybarreto">Invitar un café</a>
+        </div>
+        <div class="plan destacado">
+          <h3>⭐ Pro</h3>
+          <div class="precio">39 <small>USD</small><s>59</s></div>
+          <div class="que">Pago único. Licencia a tu nombre, con las actualizaciones de la versión 2.</div>
+          <ul>
+            <li>Traducciones sin límite</li>
+            <li>Crear, importar y compartir perfiles</li>
+            <li>Glosarios sin límite, con Excel</li>
+            <li>Excel de Netflix (DUB SCRIPT)</li>
+            <li>Comparar versiones y leer el TC quemado</li>
+            <li>Todo lo de la versión gratis</li>
+          </ul>
+          <a class="boton oro" href="https://buymeacoffee.com/dannybarreto/extras">Comprar Pro</a>
+        </div>
+      </div>
+      <div class="regalo">🎁 De vez en cuando regalo <b>códigos de prueba Pro de 7 días</b>. Síguenos en Buy Me a Coffee para enterarte.
+        ¿Eres un estudio con varios traductores? <a href="https://buymeacoffee.com/dannybarreto">Escríbeme</a>: el plan Estudio viene en camino.</div>
+    </div>
+  </section>
+
+  <section id="requisitos">
+    <div class="ancho">
+      <h2>Requisitos</h2>
+      <p class="sub">La app revisa tu equipo y te recomienda los modelos que mejor le quedan, con el tiempo estimado por episodio.</p>
+      <div class="dos">
+        <div class="caja">
+          <h3>💻 Sistema</h3>
+          <ul>
+            <li>Windows 10 u 11 de 64 bits, macOS (Apple Silicon) o Linux.</li>
+            <li>8 GB de RAM como mínimo; <b>16 GB o más</b> para traducir con modelos más grandes.</li>
+            <li>Unos 10 GB libres para los modelos (se descargan una sola vez).</li>
+            <li>Internet solo para instalar y descargar los modelos.</li>
+          </ul>
+        </div>
+        <div class="caja">
+          <h3>🎮 Tarjeta de video (recomendada)</h3>
+          <ul>
+            <li><b>NVIDIA</b> (GTX 1650, RTX 2060, 3060…): lo más rápido. En una RTX 2060, un episodio de 25 min en ~5 min con Whisper Large v3.</li>
+            <li><b>AMD Radeon o Intel Arc</b>, y gráficas integradas: con Vulkan.</li>
+            <li>Sin tarjeta de video también funciona, más lento.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="ancho">
+      <h2>Preguntas frecuentes</h2>
+      <p class="sub">¿Otra duda? Revisa la <a href="guia.pdf">guía de uso (PDF)</a> o escríbeme.</p>
+      <details><summary>¿Mis guiones o videos se suben a algún servidor?</summary>
+        <p>No. Whisper y los modelos de traducción corren en tu computadora. La app solo usa internet para descargar los modelos y avisarte de versiones nuevas.</p></details>
+      <details><summary>¿La traducción reemplaza al traductor?</summary>
+        <p>No: es un borrador que sigue tu estilo y tu glosario para ahorrarte tiempo. Tú revisas, adaptas y das la sincronía final, como siempre.</p></details>
+      <details><summary>¿Cómo recibo mi clave Pro?</summary>
+        <p>Pagas en Buy Me a Coffee y en menos de 24 horas te llega tu clave al correo con el que pagaste. En la app: Licencia → pega la clave → Activar. Se verifica en tu equipo, sin internet.</p></details>
+      <details><summary>¿Puedo usar Pro en mis dos computadoras?</summary>
+        <p>Sí. La licencia es personal, a tu nombre: actívala en los equipos donde trabajas tú. Para varios traductores, escríbeme por el plan Estudio.</p></details>
+      <details><summary>¿Qué pasa con las actualizaciones?</summary>
+        <p>Pro incluye todas las actualizaciones de la versión 2. La app te avisa cuando hay una nueva; tus modelos, perfiles y licencia se conservan al actualizar.</p></details>
+      <details><summary>¿Funciona en mi laptop?</summary>
+        <p>Sí. En Modelos y equipo la app detecta tu procesador, tu memoria y tu tarjeta de video y te recomienda modelos que quepan. Con gráfica integrada, conecta el cargador.</p></details>
+      <details><summary>Windows dice "Windows protegió su PC" al instalar</summary>
+        <p>El instalador todavía no está firmado. Haz clic en <b>Más información → Ejecutar de todas formas</b>. El código es abierto y lo puedes revisar en GitHub.</p></details>
+    </div>
+  </section>
+
+  <div class="ancho">
+    <div class="llamado">
+      <h2>Pruébala en tu próximo episodio</h2>
+      <p class="sub" style="margin: 0 auto 26px">Gratis para transcribir, convertir y sincronizar. Un café ☕ y traduces un episodio con todo lo Pro.</p>
+      <div class="acciones">
+        <a class="boton primario" href="https://github.com/sunkpoet-lang/guion-timecodes-whisper-/releases/latest">⬇ Descargar gratis</a>
+        <a class="boton fantasma" href="guia.pdf">📘 Ver la guía de uso</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="ancho">
+    <div>
+      <a href="https://github.com/sunkpoet-lang/guion-timecodes-whisper-">Código en GitHub (GPL-3.0)</a>
+      <a href="guia.pdf">Guía de uso</a>
+      <a href="https://buymeacoffee.com/dannybarreto">Buy Me a Coffee</a>
+    </div>
+    <div>© 2026 Danny Barreto · Estudio de Doblaje no está afiliado a Netflix ni a ningún estudio.</div>
+  </div>
+</footer>
+</body>
+</html>
