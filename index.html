@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Estudio de Doblaje · time codes, traducción y sincronía para doblaje</title>
-<meta name="description" content="App para traductores de doblaje al español latino: time codes con Whisper, traducción con IA según tu estilo y glosario, sincronía con el video. Todo en tu computadora, sin internet.">
+<meta name="description" content="App para traductores de doblaje: time codes con Whisper, traducción con IA según tu estilo y glosario, sincronía con el video. Todo en tu computadora, sin internet. Interfaz en español, inglés, portugués y francés.">
 <meta property="og:title" content="Estudio de Doblaje">
-<meta property="og:description" content="Time codes, traducción con IA y sincronía para doblaje en español latino. Todo en tu computadora, sin internet.">
-<meta property="og:image" content="img/pro.jpg">
+<meta property="og:description" content="Time codes, traducción con IA y sincronía para doblaje. Todo en tu computadora, sin internet.">
+<meta property="og:image" content="img/compartir.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%237b8cff'/%3E%3Cpath d='M5 10.5v3M8.5 7.5v9M12 5v14M15.5 9v6M19 7v10' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,34 +31,37 @@
   header .ancho { display: flex; align-items: center; gap: 24px; height: 64px; }
   .marca { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; font-size: 17px; white-space: nowrap; }
   .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--acento), var(--acento-2)); display: grid; place-items: center; box-shadow: 0 4px 16px rgba(123,140,255,.4); flex: none; }
-  nav.enlaces { display: flex; gap: 22px; margin-left: auto; }
-  nav.enlaces a { text-decoration: none; color: var(--texto-2); font-weight: 500; font-size: 15px; }
+  nav.enlaces { display: flex; gap: 20px; margin-left: auto; }
+  nav.enlaces a { text-decoration: none; color: var(--texto-2); font-weight: 500; font-size: 15px; white-space: nowrap; }
   nav.enlaces a:hover { color: var(--texto); }
+  .idiomas { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--borde); border-radius: 10px; background: var(--panel); flex: none; }
+  .idiomas button { border: 0; background: none; color: var(--texto-3); font: 700 12.5px Inter, sans-serif; letter-spacing: .4px; padding: 6px 8px; border-radius: 7px; cursor: pointer; }
+  .idiomas button:hover { color: var(--texto); }
+  .idiomas button[aria-pressed="true"] { background: rgba(123,140,255,.2); color: #dfe4ff; }
   .boton { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 16px; border: 1px solid transparent; transition: transform .15s, box-shadow .15s; }
   .boton:hover { transform: translateY(-1px); }
   .boton.primario { background: linear-gradient(135deg, var(--acento), var(--acento-2)); color: #fff; box-shadow: 0 8px 24px rgba(123,140,255,.35); }
-  .boton.oro { background: linear-gradient(135deg, #ffd25e, #ff9f1e); color: #1d1404; box-shadow: 0 8px 24px rgba(255,170,40,.25); }
   .boton.fantasma { border-color: var(--borde); color: var(--texto); background: var(--panel); }
-  .boton.chico { padding: 8px 16px; font-size: 14px; border-radius: 10px; }
 
   /* Portada */
   .portada { padding: 72px 0 40px; text-align: center; background: radial-gradient(800px 420px at 50% -80px, rgba(123,140,255,.28), transparent 70%); }
   .etiqueta { display: inline-block; padding: 6px 14px; border-radius: 30px; background: rgba(123,140,255,.12); border: 1px solid rgba(123,140,255,.3); color: #c7cfff; font-size: 14px; font-weight: 600; }
-  h1 { font-size: clamp(36px, 6vw, 62px); line-height: 1.08; letter-spacing: -1.5px; margin: 20px auto 18px; max-width: 900px; }
-  h1 .degradado { background: linear-gradient(135deg, #a5b1ff, #d4a8ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h1 { font-size: clamp(34px, 6vw, 62px); line-height: 1.08; letter-spacing: -1.5px; margin: 20px auto 18px; max-width: 900px; }
+  .degradado { background: linear-gradient(135deg, #a5b1ff, #d4a8ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .portada p.lema { font-size: clamp(17px, 2.2vw, 20px); color: var(--texto-2); max-width: 720px; margin: 0 auto 30px; }
   .acciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .nota-chica { color: var(--texto-3); font-size: 14px; margin-top: 14px; }
+  .pronto { display: inline-flex; align-items: center; gap: 8px; color: var(--texto-2); font-size: 14px; margin-top: 16px; }
+  .pronto::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--verde); box-shadow: 0 0 0 4px rgba(62,207,142,.18); }
   .captura-portada { margin: 48px auto 0; max-width: 1060px; border-radius: 18px; overflow: hidden; border: 1px solid var(--borde); box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03); }
 
-  /* Franja de confianza */
-  .franja { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 64px auto; }
+  /* Franja */
+  .franja { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 64px auto; }
   .franja div { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 22px; }
   .franja b { display: block; font-size: 17px; margin: 8px 0 4px; }
   .franja span { color: var(--texto-2); font-size: 15px; }
   .ico { font-size: 26px; }
 
-  section { padding: 56px 0; }
+  section { padding: 56px 0; scroll-margin-top: 64px; }
   h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.8px; line-height: 1.15; margin: 0 0 12px; }
   .sub { color: var(--texto-2); font-size: 18px; margin: 0 0 36px; max-width: 720px; }
   .centro { text-align: center; }
@@ -76,30 +79,32 @@
   .funcion .num { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(123,140,255,.14); color: #c7cfff; font-weight: 800; margin-bottom: 14px; }
   .funcion h3 { font-size: 26px; letter-spacing: -.4px; margin: 0 0 10px; }
   .funcion p { color: var(--texto-2); margin: 0 0 14px; }
-  .funcion ul { margin: 0; padding: 0; list-style: none; }
-  .funcion li { padding-left: 26px; position: relative; margin: 7px 0; color: var(--texto-2); }
-  .funcion li::before { content: "✓"; position: absolute; left: 0; color: var(--verde); font-weight: 800; }
-  .funcion li b { color: var(--texto); }
+  ul.lista { margin: 0; padding: 0; list-style: none; }
+  ul.lista li { padding-left: 26px; position: relative; margin: 7px 0; color: var(--texto-2); }
+  ul.lista li::before { content: "✓"; position: absolute; left: 0; color: var(--verde); font-weight: 800; }
+  ul.lista li b { color: var(--texto); }
   .marco { border-radius: 14px; overflow: hidden; border: 1px solid var(--borde); box-shadow: 0 24px 60px rgba(0,0,0,.5); max-height: 520px; }
   .marco img { width: 100%; object-fit: cover; object-position: top; }
   .pro-chip { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 8px; background: linear-gradient(135deg, #ffd25e, #ff9f1e); color: #1d1404; font-size: 12px; font-weight: 800; vertical-align: 4px; letter-spacing: .5px; }
 
-  /* Precios */
-  .precios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
-  .plan { background: var(--panel); border: 1px solid var(--borde); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; }
-  .plan.destacado { border-color: rgba(255,200,71,.6); background: linear-gradient(180deg, rgba(255,200,71,.08), var(--panel) 40%); position: relative; }
-  .plan.destacado::before { content: "Precio de lanzamiento"; position: absolute; top: -13px; left: 28px; background: var(--oro); color: #1d1404; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
-  .plan h3 { margin: 0; font-size: 20px; }
-  .precio { font-size: 44px; font-weight: 800; letter-spacing: -1px; margin: 10px 0 2px; }
-  .precio small { font-size: 16px; color: var(--texto-3); font-weight: 600; letter-spacing: 0; }
-  .precio s { font-size: 22px; color: var(--texto-3); font-weight: 600; margin-left: 6px; }
-  .plan .que { color: var(--texto-2); font-size: 15px; min-height: 48px; }
-  .plan ul { list-style: none; padding: 0; margin: 18px 0 24px; flex: 1; }
-  .plan li { padding: 7px 0 7px 26px; position: relative; font-size: 15px; border-top: 1px solid var(--borde); }
-  .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--verde); font-weight: 800; }
-  .plan li.no { color: var(--texto-3); }
-  .plan li.no::before { content: "—"; color: var(--texto-3); }
-  .regalo { margin-top: 22px; padding: 18px 22px; border-radius: 14px; border: 1px dashed rgba(123,140,255,.45); background: rgba(123,140,255,.06); color: var(--texto-2); text-align: center; }
+  /* Novedades */
+  .novedades { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; }
+  .tarjetas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tarjeta { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 20px; }
+  .tarjeta b { display: block; font-size: 16.5px; margin: 6px 0 4px; }
+  .tarjeta span { color: var(--texto-2); font-size: 14.5px; }
+  .tarjeta.nueva { border-color: rgba(123,140,255,.45); background: linear-gradient(180deg, rgba(123,140,255,.09), var(--panel) 60%); }
+  .subtitulo { font-size: 20px; margin: 48px 0 16px; }
+  .tarjetas.cuatro { grid-template-columns: repeat(4, 1fr); }
+
+  /* Gratis y Pro */
+  .versiones { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .plan { background: var(--panel); border: 1px solid var(--borde); border-radius: 20px; padding: 28px; }
+  .plan.destacado { border-color: rgba(255,200,71,.55); background: linear-gradient(180deg, rgba(255,200,71,.07), var(--panel) 40%); }
+  .plan h3 { margin: 0 0 4px; font-size: 22px; }
+  .plan .que { color: var(--texto-2); font-size: 15px; margin-bottom: 8px; }
+  .plan ul.lista li { border-top: 1px solid var(--borde); padding-top: 7px; padding-bottom: 7px; margin: 0; font-size: 15px; }
+  .plan ul.lista li::before { top: 7px; }
 
   /* Requisitos y preguntas */
   .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -109,6 +114,7 @@
   .caja ul { padding-left: 20px; margin: 0; }
   details { background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 18px 22px; margin-bottom: 10px; }
   summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
   summary::after { content: "+"; color: var(--acento); font-size: 22px; line-height: 1; }
   details[open] summary::after { content: "–"; }
   details p { color: var(--texto-2); margin: 12px 0 0; }
@@ -119,15 +125,22 @@
   footer a { color: var(--texto-2); text-decoration: none; margin-right: 18px; }
   footer a:hover { color: var(--texto); }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1060px) {
     nav.enlaces { display: none; }
-    .franja, .precios, .dos { grid-template-columns: 1fr; }
+    header .idiomas { margin-left: auto; }
+    .franja, .tarjetas.cuatro { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .versiones, .dos, .novedades { grid-template-columns: 1fr; }
     .funcion { grid-template-columns: 1fr; gap: 22px; margin-bottom: 56px; }
     .funcion.inv .texto { order: 0; }
     .portada { padding-top: 48px; }
   }
-  @media (max-width: 520px) {
-    header .boton { display: none; }
+  @media (max-width: 560px) {
+    header .ancho { gap: 12px; }
+    .marca { font-size: 15px; }
+    .idiomas button { padding: 6px 6px; font-size: 12px; }
+    .franja, .tarjetas, .tarjetas.cuatro { grid-template-columns: 1fr; }
     .acciones .boton { width: 100%; }
   }
 </style>
@@ -138,47 +151,51 @@
   <div class="ancho">
     <a class="marca" href="#"><span class="logo"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M2 10v3M6 6v11M10 3v18M14 8v7M18 5v13M22 10v3"/></svg></span>Estudio de Doblaje</a>
     <nav class="enlaces">
-      <a href="#funciones">Funciones</a>
-      <a href="#precios">Gratis y Pro</a>
-      <a href="#requisitos">Requisitos</a>
-      <a href="#preguntas">Preguntas</a>
-      <a href="guia.pdf">Guía de uso</a>
+      <a href="#funciones" data-t="nav_funciones">Funciones</a>
+      <a href="#novedades" data-t="nav_novedades">Novedades 2.8</a>
+      <a href="#versiones" data-t="nav_versiones">Gratis y Pro</a>
+      <a href="#requisitos" data-t="nav_requisitos">Requisitos</a>
+      <a href="#preguntas" data-t="nav_preguntas">Preguntas</a>
+      <a class="guia" href="guia.pdf" data-t="nav_guia">Guía de uso</a>
     </nav>
-    <a class="boton primario chico" href="https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases/latest">Descargar gratis</a>
+    <div class="idiomas" role="group" aria-label="Idioma">
+      <button data-idioma="es" lang="es">ES</button><button data-idioma="en" lang="en">EN</button><button data-idioma="pt" lang="pt">PT</button><button data-idioma="fr" lang="fr">FR</button>
+    </div>
   </div>
 </header>
 
 <main>
   <div class="portada">
     <div class="ancho">
-      <span class="etiqueta">🎙️ Para traductores y estudios de doblaje en español latino</span>
-      <h1>Del guion del cliente a la <span class="degradado">entrega con time codes</span>, en tu computadora</h1>
-      <p class="lema">Time codes con Whisper, traducción con IA que sigue tu estilo y tu glosario, y sincronía con el video.
+      <span class="etiqueta" data-t="etiqueta">🎙️ Para traductores y estudios de doblaje</span>
+      <h1 data-t="titulo">Del guion del cliente a la <span class="degradado">entrega con time codes</span>, en tu computadora</h1>
+      <p class="lema" data-t="lema">Time codes con Whisper, traducción con IA que sigue tu estilo y tu glosario, y sincronía con el video.
         Sin internet: tus guiones y videos nunca salen de tu equipo.</p>
       <div class="acciones">
-        <a class="boton primario" href="https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases/latest">⬇ Descargar gratis</a>
-        <a class="boton oro" href="#precios">⭐ Pro · 39 USD, pago único</a>
+        <a class="boton primario" href="#funciones" data-t="ver_funciones">Conoce las funciones</a>
+        <a class="boton fantasma guia" href="guia.pdf" data-t="leer_guia">📘 Leer la guía de uso</a>
       </div>
-      <p class="nota-chica">Windows, Mac y Linux · Transcribir, convertir y sincronizar es gratis</p>
-      <div class="captura-portada"><img src="img/app.jpg" alt="Pantalla de Estudio de Doblaje: Time codes con Whisper" width="1600" height="1000"></div>
+      <div class="pronto" data-t="pronto">Muy pronto para Windows, Mac y Linux · versión 2.8</div>
+      <div class="captura-portada"><img data-img="app" src="img/es/app.jpg" alt="Estudio de Doblaje: Time codes con Whisper" width="1400" height="875"></div>
     </div>
   </div>
 
   <div class="ancho">
     <div class="franja">
-      <div><span class="ico">🔒</span><b>Tus guiones no salen de tu PC</b><span>Todo corre en tu computadora, sin subir nada a internet. Ideal para material bajo NDA.</span></div>
-      <div><span class="ico">⚡</span><b>Usa tu tarjeta de video</b><span>NVIDIA, AMD, Intel o gráfica integrada; si no tienes, funciona con el procesador. La app elige sola lo más rápido.</span></div>
-      <div><span class="ico">📄</span><b>Los formatos de la industria</b><span>Word, Excel, .srt, .ass, ASR y ASREC, guiones de EE. UU. y el Excel DUB SCRIPT de Netflix.</span></div>
+      <div><span class="ico">🔒</span><b data-t="f1_t">Tus guiones no salen de tu PC</b><span data-t="f1">Todo corre en tu computadora, sin subir nada a internet. Ideal para material bajo NDA.</span></div>
+      <div><span class="ico">⚡</span><b data-t="f2_t">Usa tu tarjeta de video</b><span data-t="f2">NVIDIA, AMD, Intel o gráfica integrada; si no tienes, funciona con el procesador.</span></div>
+      <div><span class="ico">📄</span><b data-t="f3_t">Los formatos de la industria</b><span data-t="f3">Word, Excel, .srt, .ass, ASR y ASREC, guiones de EE. UU. y el Excel DUB SCRIPT de Netflix.</span></div>
+      <div><span class="ico">🌐</span><b data-t="f4_t">En tu idioma</b><span data-t="f4">La interfaz está en español, inglés, portugués y francés.</span></div>
     </div>
   </div>
 
   <section id="funciones">
     <div class="ancho">
       <div class="centro">
-        <h2>Un episodio completo, en una sola app</h2>
-        <p class="sub">Cada herramienta funciona sola o encadenada con las demás.</p>
+        <h2 data-t="func_t">Un episodio completo, en una sola app</h2>
+        <p class="sub" data-t="func_sub">Cada herramienta funciona sola o encadenada con las demás.</p>
       </div>
-      <div class="flujo">
+      <div class="flujo" data-t="flujo">
         <span>Material del cliente</span><i>→</i><span class="app">Convertir libreto</span><i>→</i><span class="app">Traducir</span><i>→</i>
         <span>Tú revisas</span><i>→</i><span class="app">Time codes</span><i>→</i><span class="app">Sincronizar</span><i>→</i><span>Word · Excel · .srt</span>
       </div>
@@ -186,139 +203,144 @@
       <div class="funcion">
         <div class="texto">
           <div class="num">1</div>
-          <h3>Time codes con Whisper</h3>
-          <p>Subes el video y tu guion: Whisper escucha el audio y pone el TIME CODE a cada línea.</p>
-          <ul>
+          <h3 data-t="tc_t">Time codes con Whisper</h3>
+          <p data-t="tc_p">Subes el video y tu guion: Whisper escucha el audio y pone el TIME CODE a cada línea.</p>
+          <ul class="lista" data-t="tc_l">
             <li><b>Guion traducido</b>: lo ubica en el video aunque esté en otro idioma, con alineación por IA.</li>
             <li><b>ASREC sin time code</b>: palabra por palabra; las líneas dudosas quedan en amarillo.</li>
             <li><b>Sin guion</b>: subtítulos .srt directo de lo que escucha.</li>
           </ul>
         </div>
-        <div class="marco"><img src="img/timecodes.jpg" alt="Time codes con Whisper" loading="lazy"></div>
+        <div class="marco"><img data-img="timecodes" src="img/es/timecodes.jpg" alt="Time codes con Whisper" loading="lazy" width="1352" height="1802"></div>
       </div>
 
       <div class="funcion inv">
         <div class="texto">
           <div class="num">2</div>
-          <h3>Convertir libreto</h3>
-          <p>Cualquier guion queda en la tabla de siempre: <b>T.C. · PERSONAJE · DIÁLOGO</b>, lista para Word o Excel.</p>
-          <ul>
+          <h3 data-t="lib_t">Convertir libreto</h3>
+          <p data-t="lib_p">Cualquier guion queda en la tabla de siempre: <b>T.C. · PERSONAJE · DIÁLOGO</b>, lista para Word o Excel.</p>
+          <ul class="lista" data-t="lib_l">
             <li>Libretos tradicionales, guiones numerados, "as broadcast", ASR de Word con tabla y subtítulos .srt / .ass.</li>
-            <li><b>Guiones de cine y series de EE. UU.</b>: pegas el texto y saca solo los diálogos, sin la acción.</li>
+            <li><b>Guiones de cine y series de EE. UU.</b>: pegas el texto y saca solo los diálogos.</li>
             <li>Hoja de personajes en Excel y autocompletado de nombres.</li>
           </ul>
         </div>
-        <div class="marco"><img src="img/libreto.jpg" alt="Convertir libreto" loading="lazy"></div>
+        <div class="marco"><img data-img="libreto" src="img/es/libreto.jpg" alt="Convertir libreto" loading="lazy" width="1400" height="2030"></div>
       </div>
 
       <div class="funcion">
         <div class="texto">
           <div class="num">3</div>
-          <h3>Traducir con tu estilo</h3>
-          <p>Un modelo de IA que corre en tu equipo traduce el guion siguiendo el <b>perfil</b> de la serie: reglas de lip sync,
+          <h3 data-t="tr_t">Traducir con tu estilo</h3>
+          <p data-t="tr_p">Un modelo de IA que corre en tu equipo traduce el guion siguiendo el <b>perfil</b> de la serie: reglas de lip sync,
             trato, groserías y un glosario de personajes y términos.</p>
-          <ul>
+          <ul class="lista" data-t="tr_l">
             <li>Perfiles por género (animé, caricaturas, drama, voice-over, subtítulos…) y por serie.</li>
             <li><b>El glosario se respeta</b>: lo que no cumple se pide otra vez y, si aun así falla, queda para revisar.</li>
+            <li><b>Memoria de la serie</b>: las líneas que ya aprobaste se reutilizan en los episodios siguientes.</li>
             <li>Es un borrador para ti: lo revisas y adaptas en la misma tabla.</li>
           </ul>
         </div>
-        <div class="marco"><img src="img/traducir.jpg" alt="Traducción revisada en la tabla" loading="lazy"></div>
+        <div class="marco"><img data-img="traducir" src="img/es/traducir.jpg" alt="Traducción revisada en la tabla" loading="lazy" width="1400" height="1527"></div>
       </div>
 
       <div class="funcion inv">
         <div class="texto">
           <div class="num">4</div>
-          <h3>Excel de Netflix <span class="pro-chip">PRO</span></h3>
-          <p>Carga el DUB SCRIPT tal como llega. La app traduce <b>TRANSCRIPTION</b>, lee las <b>ANNOTATIONS</b> y <b>TAGS</b>
+          <h3><span data-t="nf_t">Excel de Netflix</span> <span class="pro-chip">PRO</span></h3>
+          <p data-t="nf_p">Carga el DUB SCRIPT tal como llega. La app traduce <b>TRANSCRIPTION</b>, lee las <b>ANNOTATIONS</b> y <b>TAGS</b>
             como contexto y devuelve una copia del mismo Excel con la columna <b>DIALOGUE</b> llena.</p>
-          <ul>
+          <ul class="lista" data-t="nf_l">
             <li>Formato, T.C. y las demás hojas quedan igual.</li>
             <li>En versiones nuevas, conserva lo que ya traduciste.</li>
           </ul>
         </div>
-        <div class="marco"><img src="img/netflix.jpg" alt="Excel de Netflix traducido" loading="lazy"></div>
+        <div class="marco"><img data-img="netflix" src="img/es/netflix.jpg" alt="Excel de Netflix traducido" loading="lazy" width="1400" height="879"></div>
       </div>
 
       <div class="funcion">
         <div class="texto">
           <div class="num">5</div>
-          <h3>Sincronizar con el video</h3>
-          <p>Ajusta los T.C. viendo el video, con el subtítulo encima y la línea de tiempo por personaje.</p>
-          <ul>
+          <h3 data-t="sin_t">Sincronizar con el video</h3>
+          <p data-t="sin_p">Ajusta los T.C. viendo el video, con el subtítulo encima y la línea de tiempo por personaje.</p>
+          <ul class="lista" data-t="sin_l">
             <li>Arrastra y estira líneas con el mouse; copia y pega diálogos que se repiten.</li>
             <li>Filtra por personaje y mueve solo sus líneas.</li>
             <li><b>Comparar versiones</b> y <b>leer el TC quemado</b> <span class="pro-chip">PRO</span> cuando el cliente cambia cortes o cortinillas.</li>
           </ul>
         </div>
-        <div class="marco"><img src="img/sincronizar.jpg" alt="Sincronizar: tabla con atajos" loading="lazy"></div>
+        <div class="marco"><img data-img="sincronizar" src="img/es/sincronizar.jpg" alt="Sincronizar con el video" loading="lazy" width="1400" height="875"></div>
       </div>
     </div>
   </section>
 
-  <section id="precios">
+  <section id="novedades">
+    <div class="ancho">
+      <h2 data-t="nov_t">Novedades de la 2.8</h2>
+      <p class="sub" data-t="nov_sub">La app habla tu idioma y se adapta a tus jornadas largas.</p>
+      <div class="novedades">
+        <div class="tarjetas">
+          <div class="tarjeta nueva"><span class="ico">🌐</span><b data-t="n1_t">La app en tu idioma</b><span data-t="n1">Español, English, Português y Français. La primera vez usa el idioma de Windows; se cambia en Configuración.</span></div>
+          <div class="tarjeta nueva"><span class="ico">🔠</span><b data-t="n2_t">Letra y tema</b><span data-t="n2">Tres tamaños de letra para leer con menos esfuerzo, y tema claro u oscuro.</span></div>
+          <div class="tarjeta nueva"><span class="ico">📘</span><b data-t="n3_t">Guía en español e inglés</b><span data-t="n3">Cada sección con capturas señaladas. La app abre la de tu idioma.</span></div>
+          <div class="tarjeta nueva"><span class="ico">📄</span><b data-t="n4_t">Tus archivos de siempre</b><span data-t="n4">En cualquier idioma, lo que exportas conserva el formato T.C. · PERSONAJE · DIÁLOGO.</span></div>
+        </div>
+        <div class="marco"><img data-img="config" src="img/es/config.jpg" alt="Configuración: idioma, letra y tema" loading="lazy" width="1400" height="949"></div>
+      </div>
+
+      <h3 class="subtitulo" data-t="nov27_t">Y lo que llegó en la 2.7</h3>
+      <div class="tarjetas cuatro">
+        <div class="tarjeta"><span class="ico">🧠</span><b data-t="m1_t">Memoria de la serie</b><span data-t="m1">Aprende de tus traducciones revisadas: muletillas, apodos y jerga iguales en toda la serie.</span></div>
+        <div class="tarjeta"><span class="ico">✅</span><b data-t="m2_t">Revisar traducción</b><span data-t="m2">Señala líneas sin traducir, signos ¿ ¡ que faltan, números distintos y líneas largas para lip sync.</span></div>
+        <div class="tarjeta"><span class="ico">⏱️</span><b data-t="m3_t">Tramos y cola</b><span data-t="m3">Prueba el perfil con los primeros minutos o deja varios episodios traduciéndose de noche.</span></div>
+        <div class="tarjeta"><span class="ico">🎭</span><b data-t="m4_t">Borrador vs final</b><span data-t="m4">Asigna personajes desde el guion borrador y ve qué cambió en el corte final.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="versiones">
     <div class="ancho">
       <div class="centro">
-        <h2>Gratis para empezar. Pro para producir.</h2>
-        <p class="sub">Sin suscripción. Se paga en Buy Me a Coffee y la clave llega a tu correo; se activa en la app, sin internet.</p>
+        <h2 data-t="ver_t">Gratis para empezar. Pro para producir.</h2>
+        <p class="sub" data-t="ver_sub">Habrá una versión gratis y una Pro de pago único, sin suscripción.</p>
       </div>
-      <div class="precios">
+      <div class="versiones">
         <div class="plan">
-          <h3>Gratis</h3>
-          <div class="precio">0 <small>USD</small></div>
-          <div class="que">Para conocer la app y para el trabajo diario sin traducción.</div>
-          <ul>
+          <h3 data-t="g_t">Gratis</h3>
+          <div class="que" data-t="g_que">Para conocer la app y para el trabajo diario sin traducción.</div>
+          <ul class="lista" data-t="g_l">
             <li>Time codes con Whisper, sin límite</li>
             <li>Convertir libreto y hoja de personajes</li>
             <li>Sincronizar con el video</li>
-            <li>Traducir: 1 guion al día (hasta 1500 líneas)</li>
-            <li>6 perfiles incluidos + Mi perfil editable</li>
+            <li>Traducir: 1 guion al día</li>
+            <li>Perfiles incluidos + Mi perfil editable</li>
             <li>Glosario de 25 entradas, con Excel</li>
-            <li class="no">Excel de Netflix, comparar versiones</li>
           </ul>
-          <a class="boton fantasma" href="https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases/latest">Descargar</a>
-        </div>
-        <div class="plan">
-          <h3>☕ Café</h3>
-          <div class="precio">5 <small>USD</small></div>
-          <div class="que">2 traducciones con todo lo Pro, para un episodio de verdad. No vencen.</div>
-          <ul>
-            <li>Cualquier perfil, incluidos los que importes</li>
-            <li>Excel de Netflix</li>
-            <li>Guiones sin límite de líneas</li>
-            <li>Úsalas cuando quieras</li>
-            <li>Y apoyas que la app siga creciendo</li>
-          </ul>
-          <a class="boton fantasma" href="https://buymeacoffee.com/dannybarreto">Invitar un café</a>
         </div>
         <div class="plan destacado">
           <h3>⭐ Pro</h3>
-          <div class="precio">39 <small>USD</small><s>59</s></div>
-          <div class="que">Pago único. Licencia a tu nombre, con las actualizaciones de la versión 2.</div>
-          <ul>
+          <div class="que" data-t="p_que">Para producir episodio tras episodio.</div>
+          <ul class="lista" data-t="p_l">
             <li>Traducciones sin límite</li>
             <li>Crear, importar y compartir perfiles</li>
-            <li>Glosarios sin límite, con Excel</li>
+            <li>Glosarios sin límite y memoria de la serie</li>
+            <li>Cola de episodios y revisión avanzada</li>
             <li>Excel de Netflix (DUB SCRIPT)</li>
-            <li>Comparar versiones y leer el TC quemado</li>
-            <li>Todo lo de la versión gratis</li>
+            <li>Comparar versiones, leer el TC quemado y asignar personajes</li>
           </ul>
-          <a class="boton oro" href="https://buymeacoffee.com/dannybarreto/extras">Comprar Pro</a>
         </div>
       </div>
-      <div class="regalo">🎁 De vez en cuando regalo <b>códigos de prueba Pro de 7 días</b>. Síguenos en Buy Me a Coffee para enterarte.
-        ¿Eres un estudio con varios traductores? <a href="https://buymeacoffee.com/dannybarreto">Escríbeme</a>: el plan Estudio viene en camino.</div>
     </div>
   </section>
 
   <section id="requisitos">
     <div class="ancho">
-      <h2>Requisitos</h2>
-      <p class="sub">La app revisa tu equipo y te recomienda los modelos que mejor le quedan, con el tiempo estimado por episodio.</p>
+      <h2 data-t="req_t">Requisitos</h2>
+      <p class="sub" data-t="req_sub">La app revisa tu equipo y te recomienda los modelos que mejor le quedan, con el tiempo estimado por episodio.</p>
       <div class="dos">
         <div class="caja">
-          <h3>💻 Sistema</h3>
-          <ul>
+          <h3 data-t="req1_t">💻 Sistema</h3>
+          <ul data-t="req1">
             <li>Windows 10 u 11 de 64 bits, macOS (Apple Silicon) o Linux.</li>
             <li>8 GB de RAM como mínimo; <b>16 GB o más</b> para traducir con modelos más grandes.</li>
             <li>Unos 10 GB libres para los modelos (se descargan una sola vez).</li>
@@ -326,8 +348,8 @@
           </ul>
         </div>
         <div class="caja">
-          <h3>🎮 Tarjeta de video (recomendada)</h3>
-          <ul>
+          <h3 data-t="req2_t">🎮 Tarjeta de video (recomendada)</h3>
+          <ul data-t="req2">
             <li><b>NVIDIA</b> (GTX 1650, RTX 2060, 3060…): lo más rápido. En una RTX 2060, un episodio de 25 min en ~5 min con Whisper Large v3.</li>
             <li><b>AMD Radeon o Intel Arc</b>, y gráficas integradas: con Vulkan.</li>
             <li>Sin tarjeta de video también funciona, más lento.</li>
@@ -339,32 +361,27 @@
 
   <section id="preguntas">
     <div class="ancho">
-      <h2>Preguntas frecuentes</h2>
-      <p class="sub">¿Otra duda? Revisa la <a href="guia.pdf">guía de uso (PDF)</a> o escríbeme.</p>
-      <details><summary>¿Mis guiones o videos se suben a algún servidor?</summary>
-        <p>No. Whisper y los modelos de traducción corren en tu computadora. La app solo usa internet para descargar los modelos y avisarte de versiones nuevas.</p></details>
-      <details><summary>¿La traducción reemplaza al traductor?</summary>
-        <p>No: es un borrador que sigue tu estilo y tu glosario para ahorrarte tiempo. Tú revisas, adaptas y das la sincronía final, como siempre.</p></details>
-      <details><summary>¿Cómo recibo mi clave Pro?</summary>
-        <p>Pagas en Buy Me a Coffee y en menos de 24 horas te llega tu clave al correo con el que pagaste. En la app: Licencia → pega la clave → Activar. Se verifica en tu equipo, sin internet.</p></details>
-      <details><summary>¿Puedo usar Pro en mis dos computadoras?</summary>
-        <p>Sí. La licencia es personal, a tu nombre: actívala en los equipos donde trabajas tú. Para varios traductores, escríbeme por el plan Estudio.</p></details>
-      <details><summary>¿Qué pasa con las actualizaciones?</summary>
-        <p>Pro incluye todas las actualizaciones de la versión 2. La app te avisa cuando hay una nueva; tus modelos, perfiles y licencia se conservan al actualizar.</p></details>
-      <details><summary>¿Funciona en mi laptop?</summary>
-        <p>Sí. En Modelos y equipo la app detecta tu procesador, tu memoria y tu tarjeta de video y te recomienda modelos que quepan. Con gráfica integrada, conecta el cargador.</p></details>
-      <details><summary>Windows dice "Windows protegió su PC" al instalar</summary>
-        <p>El instalador todavía no está firmado. Haz clic en <b>Más información → Ejecutar de todas formas</b>. Es la app oficial, descargada de nuestra página.</p></details>
+      <h2 data-t="faq_t">Preguntas frecuentes</h2>
+      <p class="sub" data-t="faq_sub">¿Otra duda? Revisa la <a class="guia" href="guia.pdf">guía de uso (PDF)</a>.</p>
+      <details><summary data-t="q1">¿Cuándo se podrá descargar?</summary>
+        <p data-t="a1">Muy pronto. Mientras tanto, la guía de uso muestra cada función paso a paso, con capturas.</p></details>
+      <details><summary data-t="q2">¿Mis guiones o videos se suben a algún servidor?</summary>
+        <p data-t="a2">No. Whisper y los modelos de traducción corren en tu computadora. La app solo usa internet para descargar los modelos y avisarte de versiones nuevas.</p></details>
+      <details><summary data-t="q3">¿La traducción reemplaza al traductor?</summary>
+        <p data-t="a3">No: es un borrador que sigue tu estilo y tu glosario para ahorrarte tiempo. Tú revisas, adaptas y das la sincronía final, como siempre.</p></details>
+      <details><summary data-t="q4">¿En qué idiomas está?</summary>
+        <p data-t="a4">La interfaz está en español, inglés, portugués y francés. La traducción de guiones está pensada para doblaje al español latino, pero cada perfil elige el idioma de origen, el de destino y su variante.</p></details>
+      <details><summary data-t="q5">¿Funciona en mi laptop?</summary>
+        <p data-t="a5">Sí. En Modelos y equipo la app detecta tu procesador, tu memoria y tu tarjeta de video y te recomienda modelos que quepan. Con gráfica integrada, conecta el cargador.</p></details>
     </div>
   </section>
 
   <div class="ancho">
     <div class="llamado">
-      <h2>Pruébala en tu próximo episodio</h2>
-      <p class="sub" style="margin: 0 auto 26px">Gratis para transcribir, convertir y sincronizar. Un café ☕ y traduces un episodio con todo lo Pro.</p>
+      <h2 data-t="ll_t">Muy pronto en tu computadora</h2>
+      <p class="sub" style="margin: 0 auto 26px" data-t="ll_sub">Mientras tanto, conoce cada función en la guía de uso.</p>
       <div class="acciones">
-        <a class="boton primario" href="https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases/latest">⬇ Descargar gratis</a>
-        <a class="boton fantasma" href="guia.pdf">📘 Ver la guía de uso</a>
+        <a class="boton primario guia" href="guia.pdf" data-t="ver_guia">📘 Ver la guía de uso</a>
       </div>
     </div>
   </div>
@@ -372,13 +389,198 @@
 
 <footer>
   <div class="ancho">
-    <div>
-      <a href="https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases">Todas las versiones</a>
-      <a href="guia.pdf">Guía de uso</a>
-      <a href="https://buymeacoffee.com/dannybarreto">Buy Me a Coffee</a>
-    </div>
-    <div>© 2026 Danny Barreto · Estudio de Doblaje no está afiliado a Netflix ni a ningún estudio.</div>
+    <div><a class="guia" href="guia.pdf" data-t="nav_guia">Guía de uso</a></div>
+    <div data-t="pie">© 2026 Danny Barreto · Estudio de Doblaje no está afiliado a Netflix ni a ningún estudio.</div>
   </div>
 </footer>
+
+<script>
+// Idiomas de la página: el español está escrito arriba; aquí van inglés, portugués y francés.
+// Las imágenes en español van en img/es/ y las demás usan las de img/en/ (la app en inglés).
+const T = {
+  en: {
+    _titulo: "Estudio de Doblaje · time codes, translation and sync for dubbing",
+    _desc: "App for dubbing translators: time codes with Whisper, AI translation that follows your style and glossary, sync with the video. Everything on your computer, offline.",
+    nav_funciones: "Features", nav_novedades: "New in 2.8", nav_versiones: "Free & Pro", nav_requisitos: "Requirements", nav_preguntas: "FAQ", nav_guia: "User guide",
+    etiqueta: "🎙️ For dubbing translators and studios",
+    titulo: 'From the client\'s script to a <span class="degradado">delivery with time codes</span>, on your computer',
+    lema: "Time codes with Whisper, AI translation that follows your style and glossary, and sync with the video. Offline: your scripts and videos never leave your computer.",
+    ver_funciones: "See the features", leer_guia: "📘 Read the user guide", pronto: "Coming soon for Windows, Mac and Linux · version 2.8",
+    f1_t: "Your scripts stay on your PC", f1: "Everything runs on your computer; nothing is uploaded. Ideal for material under NDA.",
+    f2_t: "Uses your graphics card", f2: "NVIDIA, AMD, Intel or integrated graphics; without one, it runs on the processor.",
+    f3_t: "Industry formats", f3: "Word, Excel, .srt, .ass, ASR and ASREC, US screenplays and the Netflix DUB SCRIPT Excel.",
+    f4_t: "In your language", f4: "The interface is in Spanish, English, Portuguese and French.",
+    func_t: "A whole episode, in one app", func_sub: "Each tool works on its own or chained with the others.",
+    flujo: '<span>Client material</span><i>→</i><span class="app">Convert script</span><i>→</i><span class="app">Translate</span><i>→</i><span>You review</span><i>→</i><span class="app">Time codes</span><i>→</i><span class="app">Synchronize</span><i>→</i><span>Word · Excel · .srt</span>',
+    tc_t: "Time codes with Whisper", tc_p: "Upload the video and your script: Whisper listens to the audio and adds the TIME CODE to every line.",
+    tc_l: "<li><b>Translated script</b>: places it in the video even in another language, with AI alignment.</li><li><b>ASREC without time code</b>: word by word; uncertain lines are highlighted in yellow.</li><li><b>No script</b>: .srt subtitles straight from what it hears.</li>",
+    lib_t: "Convert script", lib_p: "Any script ends up in the usual table: <b>T.C. · PERSONAJE · DIÁLOGO</b>, ready for Word or Excel.",
+    lib_l: "<li>Traditional dubbing scripts, numbered or \"as broadcast\" scripts, Word ASRs with a table and .srt / .ass subtitles.</li><li><b>US film and TV screenplays</b>: paste the text and it keeps only the dialogue.</li><li>Character sheet in Excel and name autocomplete.</li>",
+    tr_t: "Translate in your style", tr_p: "An AI model running on your computer translates the script following the series <b>profile</b>: lip-sync rules, formality, profanity and a glossary of characters and terms.",
+    tr_l: "<li>Profiles by genre (anime, cartoons, drama, voice-over, subtitles…) and by series.</li><li><b>The glossary is respected</b>: lines that don't follow it are retried and, if they still fail, flagged for review.</li><li><b>Series memory</b>: lines you already approved are reused in the next episodes.</li><li>It's a draft for you: review and adapt it in the same table.</li>",
+    nf_t: "Netflix Excel", nf_p: "Load the DUB SCRIPT as it arrives. The app translates <b>TRANSCRIPTION</b>, reads <b>ANNOTATIONS</b> and <b>TAGS</b> as context, and returns a copy of the same Excel with the <b>DIALOGUE</b> column filled in.",
+    nf_l: "<li>Formatting, T.C.s and the other sheets stay the same.</li><li>In new versions, it keeps what you already translated.</li>",
+    sin_t: "Sync with the video", sin_p: "Adjust the T.C.s while watching the video, with the subtitle on top and a timeline by character.",
+    sin_l: "<li>Drag and stretch lines with the mouse; copy and paste repeated dialogue.</li><li>Filter by character and move only their lines.</li><li><b>Compare versions</b> and <b>read the burned-in TC</b> <span class=\"pro-chip\">PRO</span> when the client changes cuts or bumpers.</li>",
+    nov_t: "New in 2.8", nov_sub: "The app speaks your language and adapts to long working days.",
+    n1_t: "The app in your language", n1: "Español, English, Português and Français. At first it uses the Windows language; change it in Settings.",
+    n2_t: "Text size and theme", n2: "Three text sizes for easier reading, and a light or dark theme.",
+    n3_t: "Guide in Spanish and English", n3: "Every section with annotated screenshots. The app opens the one in your language.",
+    n4_t: "Your usual files", n4: "In any language, your exports keep the T.C. · PERSONAJE · DIÁLOGO format.",
+    nov27_t: "And what arrived in 2.7",
+    m1_t: "Series memory", m1: "Learns from your reviewed translations: catchphrases, nicknames and slang stay consistent across the series.",
+    m2_t: "Review translation", m2: "Flags untranslated lines, missing ¿ ¡ marks, mismatched numbers and lines too long for lip sync.",
+    m3_t: "Ranges and queue", m3: "Test a profile on the first minutes, or leave several episodes translating overnight.",
+    m4_t: "Draft vs final", m4: "Assign characters from the draft script and see what changed in the final cut.",
+    ver_t: "Free to start. Pro to produce.", ver_sub: "There will be a free version and a one-time-payment Pro version, no subscription.",
+    g_t: "Free", g_que: "To get to know the app and for daily work without translation.",
+    g_l: "<li>Time codes with Whisper, unlimited</li><li>Convert script and character sheet</li><li>Sync with the video</li><li>Translate: 1 script a day</li><li>Included profiles + editable My profile</li><li>25-entry glossary, with Excel</li>",
+    p_que: "To produce episode after episode.",
+    p_l: "<li>Unlimited translations</li><li>Create, import and share profiles</li><li>Unlimited glossaries and series memory</li><li>Episode queue and advanced review</li><li>Netflix Excel (DUB SCRIPT)</li><li>Compare versions, read the burned-in TC and assign characters</li>",
+    req_t: "Requirements", req_sub: "The app checks your computer and recommends the models that suit it best, with the estimated time per episode.",
+    req1_t: "💻 System", req1: "<li>64-bit Windows 10 or 11, macOS (Apple Silicon) or Linux.</li><li>8 GB of RAM minimum; <b>16 GB or more</b> to translate with larger models.</li><li>About 10 GB free for the models (downloaded only once).</li><li>Internet only to install and download the models.</li>",
+    req2_t: "🎮 Graphics card (recommended)", req2: "<li><b>NVIDIA</b> (GTX 1650, RTX 2060, 3060…): the fastest. On an RTX 2060, a 25-min episode in ~5 min with Whisper Large v3.</li><li><b>AMD Radeon or Intel Arc</b>, and integrated graphics: with Vulkan.</li><li>It also works without a graphics card, just slower.</li>",
+    faq_t: "Frequently asked questions", faq_sub: 'Another question? Check the <a class="guia" href="guide_en.pdf">user guide (PDF)</a>.',
+    q1: "When can I download it?", a1: "Very soon. Meanwhile, the user guide shows every feature step by step, with screenshots.",
+    q2: "Are my scripts or videos uploaded to a server?", a2: "No. Whisper and the translation models run on your computer. The app only uses the internet to download models and tell you about new versions.",
+    q3: "Does the translation replace the translator?", a3: "No: it's a draft that follows your style and glossary to save you time. You review, adapt and do the final sync, as always.",
+    q4: "Which languages does it support?", a4: "The interface is in Spanish, English, Portuguese and French. Script translation is designed for dubbing into Latin American Spanish, but each profile sets the source language, the target language and its variant.",
+    q5: "Does it work on my laptop?", a5: "Yes. In Models & hardware the app detects your processor, memory and graphics card and recommends models that fit. With integrated graphics, plug in the charger.",
+    ll_t: "Coming soon to your computer", ll_sub: "Meanwhile, explore every feature in the user guide.", ver_guia: "📘 Read the user guide",
+    pie: "© 2026 Danny Barreto · Estudio de Doblaje is not affiliated with Netflix or any studio.",
+  },
+  pt: {
+    _titulo: "Estudio de Doblaje · time codes, tradução e sincronia para dublagem",
+    _desc: "App para tradutores de dublagem: time codes com Whisper, tradução com IA que segue seu estilo e glossário, sincronia com o vídeo. Tudo no seu computador, sem internet.",
+    nav_funciones: "Recursos", nav_novedades: "Novidades 2.8", nav_versiones: "Grátis e Pro", nav_requisitos: "Requisitos", nav_preguntas: "Perguntas", nav_guia: "Guia de uso",
+    etiqueta: "🎙️ Para tradutores e estúdios de dublagem",
+    titulo: 'Do roteiro do cliente à <span class="degradado">entrega com time codes</span>, no seu computador',
+    lema: "Time codes com Whisper, tradução com IA que segue seu estilo e seu glossário, e sincronia com o vídeo. Sem internet: seus roteiros e vídeos nunca saem do seu computador.",
+    ver_funciones: "Conheça os recursos", leer_guia: "📘 Ler o guia de uso", pronto: "Em breve para Windows, Mac e Linux · versão 2.8",
+    f1_t: "Seus roteiros não saem do PC", f1: "Tudo roda no seu computador, sem enviar nada à internet. Ideal para material sob NDA.",
+    f2_t: "Usa sua placa de vídeo", f2: "NVIDIA, AMD, Intel ou gráfica integrada; sem placa, funciona com o processador.",
+    f3_t: "Os formatos da indústria", f3: "Word, Excel, .srt, .ass, ASR e ASREC, roteiros dos EUA e o Excel DUB SCRIPT da Netflix.",
+    f4_t: "No seu idioma", f4: "A interface está em espanhol, inglês, português e francês.",
+    func_t: "Um episódio completo, em um só app", func_sub: "Cada ferramenta funciona sozinha ou encadeada com as outras.",
+    flujo: '<span>Material do cliente</span><i>→</i><span class="app">Converter roteiro</span><i>→</i><span class="app">Traduzir</span><i>→</i><span>Você revisa</span><i>→</i><span class="app">Time codes</span><i>→</i><span class="app">Sincronizar</span><i>→</i><span>Word · Excel · .srt</span>',
+    tc_t: "Time codes com Whisper", tc_p: "Você envia o vídeo e o roteiro: o Whisper escuta o áudio e coloca o TIME CODE em cada linha.",
+    tc_l: "<li><b>Roteiro traduzido</b>: localiza no vídeo mesmo em outro idioma, com alinhamento por IA.</li><li><b>ASREC sem time code</b>: palavra por palavra; as linhas duvidosas ficam em amarelo.</li><li><b>Sem roteiro</b>: legendas .srt direto do que ele escuta.</li>",
+    lib_t: "Converter roteiro", lib_p: "Qualquer roteiro fica na tabela de sempre: <b>T.C. · PERSONAJE · DIÁLOGO</b>, pronta para Word ou Excel.",
+    lib_l: "<li>Roteiros tradicionais de dublagem, numerados ou \"as broadcast\", ASR de Word com tabela e legendas .srt / .ass.</li><li><b>Roteiros de cinema e séries dos EUA</b>: cole o texto e ele tira só os diálogos.</li><li>Planilha de personagens em Excel e preenchimento automático de nomes.</li>",
+    tr_t: "Traduzir com o seu estilo", tr_p: "Um modelo de IA que roda no seu computador traduz o roteiro seguindo o <b>perfil</b> da série: regras de lip sync, tratamento, palavrões e um glossário de personagens e termos.",
+    tr_l: "<li>Perfis por gênero (anime, desenhos, drama, voice-over, legendas…) e por série.</li><li><b>O glossário é respeitado</b>: o que não cumpre é pedido de novo e, se ainda falhar, fica para revisar.</li><li><b>Memória da série</b>: as linhas que você já aprovou são reutilizadas nos episódios seguintes.</li><li>É um rascunho para você: revise e adapte na mesma tabela.</li>",
+    nf_t: "Excel da Netflix", nf_p: "Carregue o DUB SCRIPT como ele chega. O app traduz <b>TRANSCRIPTION</b>, lê <b>ANNOTATIONS</b> e <b>TAGS</b> como contexto e devolve uma cópia do mesmo Excel com a coluna <b>DIALOGUE</b> preenchida.",
+    nf_l: "<li>Formatação, T.C. e as outras abas ficam iguais.</li><li>Em versões novas, conserva o que você já traduziu.</li>",
+    sin_t: "Sincronizar com o vídeo", sin_p: "Ajuste os T.C. vendo o vídeo, com a legenda por cima e a linha do tempo por personagem.",
+    sin_l: "<li>Arraste e estique linhas com o mouse; copie e cole diálogos que se repetem.</li><li>Filtre por personagem e mova só as linhas dele.</li><li><b>Comparar versões</b> e <b>ler o TC gravado na imagem</b> <span class=\"pro-chip\">PRO</span> quando o cliente muda cortes ou vinhetas.</li>",
+    nov_t: "Novidades da 2.8", nov_sub: "O app fala o seu idioma e se adapta às jornadas longas.",
+    n1_t: "O app no seu idioma", n1: "Español, English, Português e Français. Na primeira vez usa o idioma do Windows; dá para mudar em Configurações.",
+    n2_t: "Letra e tema", n2: "Três tamanhos de letra para ler com menos esforço, e tema claro ou escuro.",
+    n3_t: "Guia em espanhol e inglês", n3: "Cada seção com capturas comentadas. O app abre o guia do seu idioma (em inglês para o português).",
+    n4_t: "Seus arquivos de sempre", n4: "Em qualquer idioma, o que você exporta mantém o formato T.C. · PERSONAJE · DIÁLOGO.",
+    nov27_t: "E o que chegou na 2.7",
+    m1_t: "Memória da série", m1: "Aprende com suas traduções revisadas: bordões, apelidos e gírias iguais em toda a série.",
+    m2_t: "Revisar tradução", m2: "Aponta linhas sem tradução, sinais ¿ ¡ faltando, números diferentes e linhas longas para lip sync.",
+    m3_t: "Trechos e fila", m3: "Teste o perfil com os primeiros minutos ou deixe vários episódios traduzindo à noite.",
+    m4_t: "Rascunho vs final", m4: "Atribua personagens a partir do roteiro rascunho e veja o que mudou no corte final.",
+    ver_t: "Grátis para começar. Pro para produzir.", ver_sub: "Haverá uma versão grátis e uma Pro de pagamento único, sem assinatura.",
+    g_t: "Grátis", g_que: "Para conhecer o app e para o trabalho diário sem tradução.",
+    g_l: "<li>Time codes com Whisper, sem limite</li><li>Converter roteiro e planilha de personagens</li><li>Sincronizar com o vídeo</li><li>Traduzir: 1 roteiro por dia</li><li>Perfis incluídos + Meu perfil editável</li><li>Glossário de 25 entradas, com Excel</li>",
+    p_que: "Para produzir episódio após episódio.",
+    p_l: "<li>Traduções sem limite</li><li>Criar, importar e compartilhar perfis</li><li>Glossários sem limite e memória da série</li><li>Fila de episódios e revisão avançada</li><li>Excel da Netflix (DUB SCRIPT)</li><li>Comparar versões, ler o TC gravado e atribuir personagens</li>",
+    req_t: "Requisitos", req_sub: "O app analisa seu computador e recomenda os modelos mais adequados, com o tempo estimado por episódio.",
+    req1_t: "💻 Sistema", req1: "<li>Windows 10 ou 11 de 64 bits, macOS (Apple Silicon) ou Linux.</li><li>8 GB de RAM no mínimo; <b>16 GB ou mais</b> para traduzir com modelos maiores.</li><li>Uns 10 GB livres para os modelos (baixados uma única vez).</li><li>Internet só para instalar e baixar os modelos.</li>",
+    req2_t: "🎮 Placa de vídeo (recomendada)", req2: "<li><b>NVIDIA</b> (GTX 1650, RTX 2060, 3060…): o mais rápido. Numa RTX 2060, um episódio de 25 min em ~5 min com o Whisper Large v3.</li><li><b>AMD Radeon ou Intel Arc</b>, e gráficas integradas: com Vulkan.</li><li>Sem placa de vídeo também funciona, mais devagar.</li>",
+    faq_t: "Perguntas frequentes", faq_sub: 'Outra dúvida? Veja o <a class="guia" href="guide_en.pdf">guia de uso (PDF, em inglês)</a>.',
+    q1: "Quando vai dar para baixar?", a1: "Muito em breve. Enquanto isso, o guia de uso mostra cada recurso passo a passo, com capturas.",
+    q2: "Meus roteiros ou vídeos são enviados a algum servidor?", a2: "Não. O Whisper e os modelos de tradução rodam no seu computador. O app só usa a internet para baixar os modelos e avisar sobre versões novas.",
+    q3: "A tradução substitui o tradutor?", a3: "Não: é um rascunho que segue seu estilo e seu glossário para poupar tempo. Você revisa, adapta e faz a sincronia final, como sempre.",
+    q4: "Em quais idiomas ele está?", a4: "A interface está em espanhol, inglês, português e francês. A tradução de roteiros foi pensada para dublagem em espanhol latino, mas cada perfil escolhe o idioma de origem, o de destino e a variante.",
+    q5: "Funciona no meu notebook?", a5: "Sim. Em Modelos e equipamento o app detecta processador, memória e placa de vídeo e recomenda modelos que cabem. Com gráfica integrada, ligue o carregador.",
+    ll_t: "Em breve no seu computador", ll_sub: "Enquanto isso, conheça cada recurso no guia de uso.", ver_guia: "📘 Ver o guia de uso",
+    pie: "© 2026 Danny Barreto · O Estudio de Doblaje não é afiliado à Netflix nem a nenhum estúdio.",
+  },
+  fr: {
+    _titulo: "Estudio de Doblaje · time codes, traduction et synchronisation pour le doublage",
+    _desc: "Application pour traducteurs de doublage : time codes avec Whisper, traduction par IA selon votre style et votre glossaire, synchronisation avec la vidéo. Tout sur votre ordinateur, sans internet.",
+    nav_funciones: "Fonctions", nav_novedades: "Nouveautés 2.8", nav_versiones: "Gratuit et Pro", nav_requisitos: "Configuration", nav_preguntas: "Questions", nav_guia: "Guide d'utilisation",
+    etiqueta: "🎙️ Pour les traducteurs et studios de doublage",
+    titulo: 'Du script du client à la <span class="degradado">livraison avec time codes</span>, sur votre ordinateur',
+    lema: "Time codes avec Whisper, traduction par IA qui suit votre style et votre glossaire, et synchronisation avec la vidéo. Sans internet : vos scripts et vos vidéos ne quittent jamais votre ordinateur.",
+    ver_funciones: "Découvrir les fonctions", leer_guia: "📘 Lire le guide d'utilisation", pronto: "Bientôt sur Windows, Mac et Linux · version 2.8",
+    f1_t: "Vos scripts restent sur votre PC", f1: "Tout tourne sur votre ordinateur, rien n'est envoyé sur internet. Idéal pour du contenu sous NDA.",
+    f2_t: "Utilise votre carte graphique", f2: "NVIDIA, AMD, Intel ou graphique intégré ; sans carte, il fonctionne avec le processeur.",
+    f3_t: "Les formats du métier", f3: "Word, Excel, .srt, .ass, ASR et ASREC, scénarios américains et l'Excel DUB SCRIPT de Netflix.",
+    f4_t: "Dans votre langue", f4: "L'interface est en espagnol, anglais, portugais et français.",
+    func_t: "Un épisode complet, dans une seule application", func_sub: "Chaque outil fonctionne seul ou enchaîné avec les autres.",
+    flujo: '<span>Matériel du client</span><i>→</i><span class="app">Convertir le script</span><i>→</i><span class="app">Traduire</span><i>→</i><span>Vous relisez</span><i>→</i><span class="app">Time codes</span><i>→</i><span class="app">Synchroniser</span><i>→</i><span>Word · Excel · .srt</span>',
+    tc_t: "Time codes avec Whisper", tc_p: "Chargez la vidéo et votre script : Whisper écoute l'audio et ajoute le TIME CODE à chaque ligne.",
+    tc_l: "<li><b>Script traduit</b> : le place dans la vidéo même dans une autre langue, avec un alignement par IA.</li><li><b>ASREC sans time code</b> : mot à mot ; les lignes incertaines sont surlignées en jaune.</li><li><b>Sans script</b> : sous-titres .srt directement à partir de ce qu'il entend.</li>",
+    lib_t: "Convertir le script", lib_p: "N'importe quel script finit dans le tableau habituel : <b>T.C. · PERSONAJE · DIÁLOGO</b>, prêt pour Word ou Excel.",
+    lib_l: "<li>Scripts de doublage traditionnels, numérotés ou « as broadcast », ASR Word avec tableau et sous-titres .srt / .ass.</li><li><b>Scénarios de films et séries américains</b> : collez le texte, il ne garde que les dialogues.</li><li>Fiche des personnages dans Excel et saisie automatique des noms.</li>",
+    tr_t: "Traduire avec votre style", tr_p: "Un modèle d'IA qui tourne sur votre ordinateur traduit le script en suivant le <b>profil</b> de la série : règles de lip sync, tutoiement ou vouvoiement, grossièretés et un glossaire de personnages et de termes.",
+    tr_l: "<li>Profils par genre (animé, dessins animés, drame, voice-over, sous-titres…) et par série.</li><li><b>Le glossaire est respecté</b> : ce qui ne le suit pas est redemandé et, si cela échoue encore, reste à vérifier.</li><li><b>Mémoire de la série</b> : les lignes déjà validées sont réutilisées dans les épisodes suivants.</li><li>C'est un brouillon pour vous : vous le relisez et l'adaptez dans le même tableau.</li>",
+    nf_t: "Excel Netflix", nf_p: "Chargez le DUB SCRIPT tel qu'il arrive. L'application traduit <b>TRANSCRIPTION</b>, lit les <b>ANNOTATIONS</b> et <b>TAGS</b> comme contexte et rend une copie du même Excel avec la colonne <b>DIALOGUE</b> remplie.",
+    nf_l: "<li>La mise en forme, les T.C. et les autres feuilles restent identiques.</li><li>Dans les nouvelles versions, il conserve ce que vous avez déjà traduit.</li>",
+    sin_t: "Synchroniser avec la vidéo", sin_p: "Ajustez les T.C. en regardant la vidéo, avec le sous-titre par-dessus et une timeline par personnage.",
+    sin_l: "<li>Faites glisser et étirez les lignes à la souris ; copiez et collez les répliques qui se répètent.</li><li>Filtrez par personnage et déplacez seulement ses lignes.</li><li><b>Comparer les versions</b> et <b>lire le TC incrusté</b> <span class=\"pro-chip\">PRO</span> quand le client change des coupes ou des jingles.</li>",
+    nov_t: "Nouveautés de la 2.8", nov_sub: "L'application parle votre langue et s'adapte aux longues journées.",
+    n1_t: "L'application dans votre langue", n1: "Español, English, Português et Français. La première fois, elle utilise la langue de Windows ; elle se change dans Configuration.",
+    n2_t: "Taille du texte et thème", n2: "Trois tailles de texte pour lire avec moins d'effort, et un thème clair ou sombre.",
+    n3_t: "Guide en espagnol et en anglais", n3: "Chaque section avec des captures annotées. L'application ouvre celui de votre langue (en anglais pour le français).",
+    n4_t: "Vos fichiers habituels", n4: "Dans toutes les langues, vos exports gardent le format T.C. · PERSONAJE · DIÁLOGO.",
+    nov27_t: "Et ce qui est arrivé dans la 2.7",
+    m1_t: "Mémoire de la série", m1: "Apprend de vos traductions relues : tics de langage, surnoms et argot identiques dans toute la série.",
+    m2_t: "Vérifier la traduction", m2: "Signale les lignes non traduites, les ¿ ¡ manquants, les nombres différents et les lignes trop longues pour le lip sync.",
+    m3_t: "Extraits et file d'attente", m3: "Testez un profil sur les premières minutes ou laissez plusieurs épisodes se traduire pendant la nuit.",
+    m4_t: "Brouillon vs final", m4: "Attribuez les personnages depuis le script brouillon et voyez ce qui a changé dans le montage final.",
+    ver_t: "Gratuit pour commencer. Pro pour produire.", ver_sub: "Il y aura une version gratuite et une version Pro à paiement unique, sans abonnement.",
+    g_t: "Gratuit", g_que: "Pour découvrir l'application et pour le travail quotidien sans traduction.",
+    g_l: "<li>Time codes avec Whisper, sans limite</li><li>Convertir le script et fiche des personnages</li><li>Synchroniser avec la vidéo</li><li>Traduire : 1 script par jour</li><li>Profils inclus + Mon profil modifiable</li><li>Glossaire de 25 entrées, avec Excel</li>",
+    p_que: "Pour produire épisode après épisode.",
+    p_l: "<li>Traductions illimitées</li><li>Créer, importer et partager des profils</li><li>Glossaires illimités et mémoire de la série</li><li>File d'attente d'épisodes et vérification avancée</li><li>Excel Netflix (DUB SCRIPT)</li><li>Comparer les versions, lire le TC incrusté et attribuer les personnages</li>",
+    req_t: "Configuration requise", req_sub: "L'application analyse votre ordinateur et recommande les modèles les plus adaptés, avec le temps estimé par épisode.",
+    req1_t: "💻 Système", req1: "<li>Windows 10 ou 11 64 bits, macOS (Apple Silicon) ou Linux.</li><li>8 Go de RAM minimum ; <b>16 Go ou plus</b> pour traduire avec de plus grands modèles.</li><li>Environ 10 Go libres pour les modèles (téléchargés une seule fois).</li><li>Internet seulement pour installer et télécharger les modèles.</li>",
+    req2_t: "🎮 Carte graphique (recommandée)", req2: "<li><b>NVIDIA</b> (GTX 1650, RTX 2060, 3060…) : le plus rapide. Sur une RTX 2060, un épisode de 25 min en ~5 min avec Whisper Large v3.</li><li><b>AMD Radeon ou Intel Arc</b>, et graphiques intégrés : avec Vulkan.</li><li>Sans carte graphique, ça fonctionne aussi, plus lentement.</li>",
+    faq_t: "Questions fréquentes", faq_sub: 'Une autre question ? Consultez le <a class="guia" href="guide_en.pdf">guide d\'utilisation (PDF, en anglais)</a>.',
+    q1: "Quand pourra-t-on le télécharger ?", a1: "Très bientôt. En attendant, le guide d'utilisation montre chaque fonction pas à pas, avec des captures.",
+    q2: "Mes scripts ou vidéos sont-ils envoyés sur un serveur ?", a2: "Non. Whisper et les modèles de traduction tournent sur votre ordinateur. L'application n'utilise internet que pour télécharger les modèles et vous prévenir des nouvelles versions.",
+    q3: "La traduction remplace-t-elle le traducteur ?", a3: "Non : c'est un brouillon qui suit votre style et votre glossaire pour vous faire gagner du temps. Vous relisez, adaptez et faites la synchronisation finale, comme toujours.",
+    q4: "Dans quelles langues est-elle disponible ?", a4: "L'interface est en espagnol, anglais, portugais et français. La traduction des scripts est pensée pour le doublage en espagnol latino-américain, mais chaque profil choisit la langue source, la langue cible et sa variante.",
+    q5: "Fonctionne-t-elle sur mon portable ?", a5: "Oui. Dans Modèles et matériel, l'application détecte votre processeur, votre mémoire et votre carte graphique et recommande des modèles adaptés. Avec un graphique intégré, branchez le chargeur.",
+    ll_t: "Bientôt sur votre ordinateur", ll_sub: "En attendant, découvrez chaque fonction dans le guide d'utilisation.", ver_guia: "📘 Voir le guide d'utilisation",
+    pie: "© 2026 Danny Barreto · Estudio de Doblaje n'est affilié ni à Netflix ni à aucun studio.",
+  },
+};
+
+const ORIGINAL = {};
+document.querySelectorAll("[data-t]").forEach((el) => { ORIGINAL[el.dataset.t] = ORIGINAL[el.dataset.t] ?? el.innerHTML; });
+const TITULO_ES = document.title, DESC_ES = document.querySelector('meta[name="description"]').content;
+
+function ponerIdioma(idioma) {
+  if (!(idioma in T) && idioma !== "es") idioma = "es";
+  const dic = T[idioma] || {};
+  document.documentElement.lang = idioma;
+  document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = dic[el.dataset.t] ?? ORIGINAL[el.dataset.t]; });
+  document.title = dic._titulo || TITULO_ES;
+  document.querySelector('meta[name="description"]').content = dic._desc || DESC_ES;
+  const carpeta = idioma === "es" ? "es" : "en";
+  document.querySelectorAll("img[data-img]").forEach((img) => { img.src = `img/${carpeta}/${img.dataset.img}.jpg`; });
+  document.querySelectorAll("a.guia").forEach((a) => { a.href = idioma === "es" ? "guia.pdf" : "guide_en.pdf"; });
+  document.querySelectorAll(".idiomas button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.idioma === idioma)));
+  try { localStorage.setItem("idioma", idioma); } catch { /* sin almacenamiento */ }
+}
+
+document.querySelector(".idiomas").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-idioma]");
+  if (b) ponerIdioma(b.dataset.idioma);
+});
+
+// ?lang=en en el enlace, lo último que eligió el visitante, o el idioma del navegador
+let inicial = new URLSearchParams(location.search).get("lang");
+try { inicial = inicial || localStorage.getItem("idioma"); } catch { /* */ }
+inicial = inicial || (navigator.language || "es").slice(0, 2).toLowerCase();
+ponerIdioma(inicial);
+</script>
 </body>
 </html>
