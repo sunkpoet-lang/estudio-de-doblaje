@@ -1,5 +1,10 @@
 # Estudio de Doblaje · sitio web
 
+[![Licencia: MIT](https://img.shields.io/badge/licencia-MIT-yellow.svg)](./LICENSE)
+[![Sitio en GitHub Pages](https://img.shields.io/badge/sitio-GitHub%20Pages-222222.svg)](https://sunkpoet-lang.github.io/estudio-de-doblaje/)
+[![Idiomas](https://img.shields.io/badge/idiomas-es%20%7C%20en%20%7C%20pt%20%7C%20fr-green.svg)](https://sunkpoet-lang.github.io/estudio-de-doblaje/)
+[![Última app](https://img.shields.io/github/v/release/sunkpoet-lang/estudio-de-doblaje-descargas?include_prereleases&label=%C3%BAltima%20app)](https://github.com/sunkpoet-lang/estudio-de-doblaje-descargas/releases)
+
 Página de presentación de **Estudio de Doblaje**, la app de escritorio para traductores de doblaje que genera time codes, traduce sin internet y sincroniza guiones. El sitio muestra qué hace la app, incluye las guías de uso y enlaza a las descargas.
 
 - **Sitio:** <https://sunkpoet-lang.github.io/estudio-de-doblaje/>

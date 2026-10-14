@@ -3,6 +3,10 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-13] - Documentación del repositorio
+
+- docs: README ampliado, licencia MIT para el código de la página, guía de contribución e historial de cambios
+
 ## [2026-10-04] - Página de la 2.8 en cuatro idiomas
 
 - feat: página de la 2.8 en español, inglés, portugués y francés, sin descarga ni precios
